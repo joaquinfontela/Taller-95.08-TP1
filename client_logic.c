@@ -1,5 +1,8 @@
 #include "client_logic.h"
-#define BUFFER_LEN 70
+
+#include <stddef.h>
+#include <stdio.h>
+#define BUFFER_LEN 1000000
 
 static bool client_logic_commandIsValid(client_t* self, int argc, char** argv) {
   clientCommandValidator_t commandValidator;
@@ -34,7 +37,10 @@ static bool client_logic_send(client_t* self) {
   client_socket_t_connect(&(self->skt), self->commandParser.host,
                           self->commandParser.port);
 
+  // cesarEncoder_t* cesar = (cesarEncoder_t*)self->encoder.encoder;
+
   do {
+    // printf("\n%d\n", cesar->offset);
     bytesRead = stdinReader_t_readChunk(&(self->stdinReader), message);
     encoder_t_encode(&(self->encoder), (unsigned char*)message);
     client_socket_t_send(&(self->skt), message, bytesRead);

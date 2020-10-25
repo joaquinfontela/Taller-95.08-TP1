@@ -6,11 +6,10 @@
 #include "common_vigenere.h"
 
 typedef struct encoder {
-  unsigned char* method;
   unsigned char* key;
-  cesarEncoder_t cesarEncoder;
-  vigenereEncoder_t vigenereEncoder;
-  rc4Encoder_t rc4Encoder;
+  void* encoder;
+  void (*encode)(void*, unsigned char*);
+  void (*decode)(void*, unsigned char*, unsigned int);
 } encoder_t;
 
 /*  Pre:          method = una cadena de caracteres con el nombre del encoder.

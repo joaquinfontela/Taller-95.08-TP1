@@ -51,6 +51,7 @@ static ssize_t server_logic_recieveMessage(server_t* self, unsigned char* buf) {
 static bool server_logic_decode(server_t* self, unsigned char* buf,
                                 size_t bytesRecieved) {
   if (encoder_t_decode(&(self->decoder), buf, bytesRecieved) != 0) return false;
+
   return true;
 }
 

@@ -47,7 +47,8 @@ static unsigned char rc4Encoder_t_PRGA(rc4Encoder_t *self) {
   return self->S[(self->S[i] + self->S[j]) & 255];
 }
 
-void rc4Encoder_t_encode(rc4Encoder_t *self, unsigned char string[]) {
+void rc4Encoder_t_encode(void *selfVoid, unsigned char string[]) {
+  rc4Encoder_t *self = (rc4Encoder_t *)selfVoid;
   int n;
   size_t stringLength = strlen((char *)string);
 
@@ -56,8 +57,9 @@ void rc4Encoder_t_encode(rc4Encoder_t *self, unsigned char string[]) {
   }
 }
 
-void rc4Encoder_t_decode(rc4Encoder_t *self, unsigned char string[],
+void rc4Encoder_t_decode(void *selfVoid, unsigned char string[],
                          unsigned int bytesToDecode) {
+  rc4Encoder_t *self = (rc4Encoder_t *)selfVoid;
   int n;
   unsigned int stringLength = bytesToDecode;
 

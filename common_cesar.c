@@ -10,7 +10,8 @@ int cesarEncoder_t_initialize(cesarEncoder_t* self, unsigned char offset[]) {
   return 0;
 }
 
-void cesarEncoder_t_encode(cesarEncoder_t* self, unsigned char string[]) {
+void cesarEncoder_t_encode(void* selfVoid, unsigned char string[]) {
+  cesarEncoder_t* self = (cesarEncoder_t*)selfVoid;
   uint32_t currentPosition = 0;
   unsigned char currentChar = string[currentPosition];
   while (currentChar != '\0') {
@@ -20,8 +21,9 @@ void cesarEncoder_t_encode(cesarEncoder_t* self, unsigned char string[]) {
   }
 }
 
-void cesarEncoder_t_decode(cesarEncoder_t* self, unsigned char string[],
+void cesarEncoder_t_decode(void* selfVoid, unsigned char string[],
                            unsigned int bytesToDecode) {
+  cesarEncoder_t* self = (cesarEncoder_t*)selfVoid;
   uint32_t currentPosition = 0;
   unsigned char currentChar = string[currentPosition];
   while ((currentChar != '\0') && (currentPosition < bytesToDecode)) {
